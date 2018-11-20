@@ -22,13 +22,12 @@ ENV PATH="/usr/local/bin:${PATH}"
 
 RUN wpr installroot --https_cert_file /webpagereplay/certs/wpr_cert.pem --https_key_file /webpagereplay/certs/wpr_key.pem
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/browsertime
 WORKDIR /usr/src/app
-
+COPY ./browsertime/ /usr/src/app/browsertime/
 COPY package.* /usr/src/app/
 RUN npm install --production
 COPY . /usr/src/app
-
 COPY docker/scripts/start.sh /start.sh
 
 ## This is to avoid click the OK button
